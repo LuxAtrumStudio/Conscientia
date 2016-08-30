@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Pessum">
+      <UniqueIdentifier>{782c94df-c12c-49b4-8078-bdb460a65ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Header Files">
+      <UniqueIdentifier>{810aed64-2846-4c49-a9f4-9789fb9a9f88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Source Files">
+      <UniqueIdentifier>{855de433-0d3b-4a1a-a3f7-2ab809d3b7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Header Files\rest">
+      <UniqueIdentifier>{87312ea4-1d15-4add-a0c1-51042647032c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Source Files\rest">
+      <UniqueIdentifier>{1be4c8fb-54b3-4b33-b981-63f4749e54f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Source Files\lux_reader">
+      <UniqueIdentifier>{15b77925-1aaf-4ae3-aede-32c7db8c4d1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Source Files\logging">
+      <UniqueIdentifier>{25f10d4b-a784-425f-9942-671b0076245e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Source Files\conscientia">
+      <UniqueIdentifier>{b19ab8f7-4e23-4e8e-99e1-07b43185140a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Header Files\lux_reader">
+      <UniqueIdentifier>{027ebae0-bcc9-44d0-8357-27f9f7c28878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Header Files\logging">
+      <UniqueIdentifier>{c6528ec6-d3f8-4dbd-ac08-ffbc66702df0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pessum\Header Files\conscientia">
+      <UniqueIdentifier>{5d017b0d-7302-4633-8dee-344d0291b78c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pessum_files\logging.cpp">
+      <Filter>Pessum\Source Files\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="pessum_files\lux_reader.cpp">
+      <Filter>Pessum\Source Files\lux_reader</Filter>
+    </ClCompile>
+    <ClCompile Include="pessum_files\rest.cpp">
+      <Filter>Pessum\Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="pessum_files\pessum_core.cpp">
+      <Filter>Pessum\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pessum_files\conscientia.cpp">
+      <Filter>Pessum\Source Files\conscientia</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log_output.log">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pessum_files\rest.h">
+      <Filter>Pessum\Header Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="pessum_files\lux_reader.h">
+      <Filter>Pessum\Header Files\lux_reader</Filter>
+    </ClInclude>
+    <ClInclude Include="pessum_files\logging.h">
+      <Filter>Pessum\Header Files\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="pessum_files\pessum_core.h">
+      <Filter>Pessum\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pessum_files\conscientia.h">
+      <Filter>Pessum\Header Files\conscientia</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pessum_files\get_page.py">
+      <Filter>Pessum\Source Files\rest</Filter>
+    </None>
+  </ItemGroup>
+</Project>
