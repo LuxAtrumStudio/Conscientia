@@ -15,7 +15,8 @@ namespace pessum {
 		extern std::vector<Window> virtualwindows;
 		extern int boundwindow;
 		extern int currentbuffer;
-		extern HANDLE loadbuffer, displaybuffer;
+		extern HANDLE displaybuffer1, displaybuffer2;
+		extern bool seconedbuffer;
 		extern _CONSOLE_SCREEN_BUFFER_INFO consoleinfo;
 		extern int firstpage, firstlist, firstitem;
 		extern std::vector<int> loadingbars;
@@ -32,6 +33,15 @@ namespace pessum {
 		void DrawTitle(int pointer = boundwindow);
 		void TerminateWindow(int pointer = boundwindow);
 		void TerminateWindowAll();
+		char GetChar();
+		int CinInt();
+		std::string CinString();
+		double CinFloat();
+		void Print(std::string text = "NULL", int cursorx = -1, int cursory = -1, int pointer = boundwindow);
+		void Update();
+		void SetConsoleName(std::string consolename);
+		void WriteOutput(std::string text, COORD position);
+		void TerminateConscientia();
 	}
 }
 #endif // !_PESSUM_CONSCIENTIA_H_

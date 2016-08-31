@@ -6,6 +6,8 @@
 int main(int argc, char* argv[]) {
 	pessum::InitializePessumComponents();
 	pessum::conscientia::InitializeConscientia();
+	pessum::conscientia::TerminateConscientia();
 	pessum::TerminatePessumComponents();
 	return(1);
 }
+//TODO; Transfer liens 290-707 of old to new

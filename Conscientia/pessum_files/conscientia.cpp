@@ -3,6 +3,8 @@
 #include <sstream>
 #include <vector>
 #include <Windows.h>
+#include <conio.h>
+
 #include "pessum_core.h"
 #include "logging.h"
 
@@ -12,7 +14,8 @@ namespace pessum {
 		std::vector<Window> virtualwindows;
 		int boundwindow = 0;
 		int currentbuffer = 0;
-		HANDLE loadbuffer, displaybuffer;
+		HANDLE displaybuffer1, displaybuffer2;
+		bool seconedbuffer = true;
 		_CONSOLE_SCREEN_BUFFER_INFO consoleinfo;
 		int firstpage = 0, firstlist = 0, firstitem = 0;
 		std::vector<int> loadingbars;
@@ -22,15 +25,15 @@ namespace pessum {
 void pessum::conscientia::InitializeConscientia()
 {
 	logloc = pessum::logging::AddLogLocation("pessum_files/conscientia/");
-	loadbuffer = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-	displaybuffer = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-	if (SetConsoleActiveScreenBuffer(displaybuffer) == false) {
+	displaybuffer1 = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	displaybuffer2 = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	if (SetConsoleActiveScreenBuffer(displaybuffer1) == false) {
 		pessum::logging::LogLoc(pessum::logging::LOG_ERROR, "Failed to set display buffer", logloc, "InitializeConscientia");
 	}
 	else {
 		pessum::logging::LogLoc(pessum::logging::LOG_SUCCESS, "Set display buffer", logloc, "InitalizeConscientia");
 	}
-	if (GetConsoleScreenBufferInfo(displaybuffer, &consoleinfo) == false) {
+	if (GetConsoleScreenBufferInfo(displaybuffer1, &consoleinfo) == false) {
 		pessum::logging::LogLoc(pessum::logging::LOG_ERROR, "Failed to get display buffer info", logloc, "InitializeConscientia");
 	}
 	else {
@@ -176,59 +179,53 @@ void pessum::conscientia::DrawBorder(int pointer)
 	std::string characterH;
 	std::stringstream sstreamH;
 	COORD posH;
-	DWORD dwBytesWrittenH = 0;
 	sstreamH << H;
 	sstreamH >> characterH;
 	for (x = 0; x <= virtualwindows[pointer].sizex - 1; x++) {
 		posH = { (short)x + (short)virtualwindows[pointer].posx, (short)virtualwindows[pointer].posy };
-		WriteConsoleOutputCharacter(loadbuffer, characterH.c_str(), characterH.size(), posH, &dwBytesWrittenH);
+		WriteOutput(characterH, posH);
 		posH = { (short)x + (short)virtualwindows[pointer].posx, (short)(virtualwindows[pointer].posy + virtualwindows[pointer].sizey) - 1 };
-		WriteConsoleOutputCharacter(loadbuffer, characterH.c_str(), characterH.size(), posH, &dwBytesWrittenH);
+		WriteOutput(characterH, posH);
 	}
 	std::string characterV;
 	std::stringstream sstreamV;
 	COORD posV;
-	DWORD dwBytesWrittenV = 0;
 	sstreamV << V;
 	sstreamV >> characterV;
 	for (y = 0; y <= virtualwindows[pointer].sizey - 1; y++) {
 		posV = { (short)virtualwindows[pointer].posx, (short)y + (short)virtualwindows[pointer].posy };
-		WriteConsoleOutputCharacter(loadbuffer, characterV.c_str(), characterV.size(), posV, &dwBytesWrittenV);
+		WriteOutput(characterV, posV);
 		posV = { (short)(virtualwindows[pointer].posx + virtualwindows[pointer].sizex) - 1, (short)y + (short)virtualwindows[pointer].posy };
-		WriteConsoleOutputCharacter(loadbuffer, characterV.c_str(), characterV.size(), posV, &dwBytesWrittenV);
+		WriteOutput(characterV, posV);
 	}
 	std::string character1;
 	std::stringstream sstream1;
 	COORD pos1;
-	DWORD dwBytesWritten1 = 0;
 	sstream1 << TL;
 	sstream1 >> character1;
 	pos1 = { (short)virtualwindows[pointer].posx, (short)virtualwindows[pointer].posy };
-	WriteConsoleOutputCharacter(loadbuffer, character1.c_str(), character1.size(), pos1, &dwBytesWritten1);
+	WriteOutput(character1, pos1);
 	std::string character2;
 	std::stringstream sstream2;
 	COORD pos2;
-	DWORD dwBytesWritten2 = 0;
 	sstream2 << TR;
 	sstream2 >> character2;
 	pos2 = { (short)(virtualwindows[pointer].posx + virtualwindows[pointer].sizex) - 1, (short)virtualwindows[pointer].posy };
-	WriteConsoleOutputCharacter(loadbuffer, character2.c_str(), character2.size(), pos2, &dwBytesWritten2);
+	WriteOutput(character2, pos2);
 	std::string character3;
 	std::stringstream sstream3;
 	COORD pos3;
-	DWORD dwBytesWritten3 = 0;
 	sstream3 << BL;
 	sstream3 >> character3;
 	pos3 = { (short)virtualwindows[pointer].posx, (short)(virtualwindows[pointer].posy + virtualwindows[pointer].sizey) - 1 };
-	WriteConsoleOutputCharacter(loadbuffer, character3.c_str(), character3.size(), pos3, &dwBytesWritten3);
+	WriteOutput(character3, pos3);
 	std::string character4;
 	std::stringstream sstream4;
 	COORD pos4;
-	DWORD dwBytesWritten4 = 0;
 	sstream4 << BR;
 	sstream4 >> character4;
 	pos4 = { (short)(virtualwindows[pointer].posx + virtualwindows[pointer].sizex) - 1, (short)(virtualwindows[pointer].posy + virtualwindows[pointer].sizey) - 1 };
-	WriteConsoleOutputCharacter(loadbuffer, character4.c_str(), character4.size(), pos4, &dwBytesWritten4);
+	WriteOutput(character4, pos4);
 }
 
 void pessum::conscientia::DrawTitle(int pointer)
@@ -238,9 +235,8 @@ void pessum::conscientia::DrawTitle(int pointer)
 	windowSize = windowSize / 2;
 	titleSize = titleSize / 2;
 	COORD pos = { (windowSize - titleSize) + virtualwindows[pointer].posx, virtualwindows[pointer].posy };
-	DWORD dwBytesWritten;
 	std::string title = virtualwindows[pointer].name;
-	WriteConsoleOutputCharacter(loadbuffer, title.c_str(), title.size(), pos, &dwBytesWritten);
+	WriteOutput(title, pos);
 }
 
 void pessum::conscientia::TerminateWindow(int pointer)
@@ -259,4 +255,139 @@ void pessum::conscientia::TerminateWindowAll()
 {
 	for (unsigned a = 0; a < virtualwindows.size(); a++) {
 	}
+}
+
+char pessum::conscientia::GetChar()
+{
+	char input;
+	input = _getch();
+	return(input);
+}
+
+int pessum::conscientia::CinInt()
+{
+	int input = 0;
+	int rawin = 0;
+	while (rawin != 13) {
+		rawin = _getch();
+		input = (input * 10) + rawin;
+	}
+	return(input);
+}
+
+std::string pessum::conscientia::CinString()
+{
+	std::string input;
+	char inputchar;
+	int rawint = 0;
+	while (rawint != 13) {
+		rawint = _getch();
+		inputchar = char(rawint);
+		input = input + inputchar;
+	}
+	return(input);
+}
+
+double pessum::conscientia::CinFloat()
+{
+	std::string rawstr = CinString();
+	std::string::size_type sz;
+	double input;
+	input = stof(rawstr, &sz);
+	return(input);
+}
+
+void pessum::conscientia::Print(std::string text, int cursorx, int cursory, int pointer)
+{
+	if (cursorx != -1) {
+		virtualwindows[pointer].cursorx = cursorx;
+	}
+	if (cursory != -1) {
+		virtualwindows[pointer].cursory = cursory;
+	}
+	for (int a = 0; a < text.size(); a++) {
+		if (text[a] == '/') {
+			int b = a + 1;
+			if (text[b] == 'n') {
+				virtualwindows[pointer].cursory++;
+				if (virtualwindows[pointer].cursory > virtualwindows[pointer].sizey) {
+					virtualwindows[pointer].cursory = 0;
+					if (virtualwindows[pointer].border == true || virtualwindows[pointer].title == true) {
+						virtualwindows[pointer].cursory++;
+					}
+				}
+				ClearWindow(pointer);
+				a = a + 2;
+			}
+		}
+		else if (text[a] != '/') {
+			if (virtualwindows[pointer].border == false) {
+				if (virtualwindows[pointer].cursorx >= virtualwindows[pointer].sizex) {
+					virtualwindows[pointer].cursorx = 0;
+					virtualwindows[pointer].cursory++;
+					if (virtualwindows[pointer].cursory >= virtualwindows[pointer].sizey) {
+						virtualwindows[pointer].cursory = 0;
+						if (virtualwindows[pointer].title == true) {
+							virtualwindows[pointer].cursory++;
+						}
+						ClearWindow(pointer);
+					}
+				}
+			}
+			if (virtualwindows[pointer].border == true) {
+				if (virtualwindows[pointer].cursorx >= virtualwindows[pointer].sizex - 1) {
+					virtualwindows[pointer].cursorx = 1;
+					virtualwindows[pointer].cursory++;
+					if (virtualwindows[pointer].cursory >= virtualwindows[pointer].sizey - 1) {
+						virtualwindows[pointer].cursory = 1;
+						ClearWindow(pointer);
+					}
+				}
+			}
+			std::string character;
+			std::stringstream sstream;
+			sstream << text[a];
+			sstream >> character;
+			COORD pos = { virtualwindows[pointer].cursorx + virtualwindows[pointer].posx, virtualwindows[pointer].cursory + virtualwindows[pointer].posy };
+			WriteOutput(character, pos);
+			virtualwindows[pointer].cursorx++;
+		}
+	}
+}
+
+void pessum::conscientia::Update()
+{
+	if (seconedbuffer == true) {
+		SetConsoleActiveScreenBuffer(displaybuffer2);
+		seconedbuffer = false;
+		displaybuffer2 = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+		displaybuffer1 = displaybuffer2;
+	}
+	else if (seconedbuffer == false) {
+		SetConsoleActiveScreenBuffer(displaybuffer1);
+		seconedbuffer = true;
+		displaybuffer1 = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+		displaybuffer2 = displaybuffer1;
+	}
+}
+
+void pessum::conscientia::SetConsoleName(std::string consolename)
+{
+	SetConsoleTitle(consolename.c_str());
+}
+
+void pessum::conscientia::WriteOutput(std::string text, COORD position)
+{
+	DWORD dwBytesWritten = 0;
+	if (seconedbuffer == false) {
+		WriteConsoleOutputCharacter(displaybuffer1, text.c_str(), text.size(), position, &dwBytesWritten);
+	}
+	else if (seconedbuffer == true) {
+		WriteConsoleOutputCharacter(displaybuffer2, text.c_str(), text.size(), position, &dwBytesWritten);
+	}
+}
+
+void pessum::conscientia::TerminateConscientia()
+{
+	TerminateWindowAll();
 }
