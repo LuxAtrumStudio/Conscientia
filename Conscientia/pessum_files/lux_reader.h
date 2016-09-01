@@ -1,5 +1,5 @@
-#ifndef _PESSUM_LUX_READER_H_
-#define _PESSUM_LUX_READER_H_
+#ifndef _PESSUM_FILES_LUX_READER_H_
+#define _PESSUM_FILES_LUX_READER_H_
 #include <string>
 #include <vector>
 #include "pessum_core.h"
@@ -26,7 +26,7 @@ namespace pessum {
 		struct Hierarchy
 		{
 			std::string hierarchyname;
-			std::vector<Page> mierarchypages;
+			std::vector<Page> hierarchypages;
 		};
 		//Structs for lux data loading
 		struct Variable
@@ -72,4 +72,4 @@ namespace pessum {
 		void OuputRawFileData(LuxFileType filetype, std::string filedirectory, RawLuxCode rawoutputcode);
 	}
 }
-#endif // !_PESSUM_LUX_READER_H_
+#endif // !_PESSUM_FILES_LUX_READER_H_

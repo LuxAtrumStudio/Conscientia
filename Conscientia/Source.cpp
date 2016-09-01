@@ -2,7 +2,8 @@
 #include "pessum_files\logging.h"
 #include "pessum_files\lux_reader.h"
 #include "pessum_files\rest.h"
-#include "pessum_files\conscientia.h"
+#include "pessum_files\conscientia_files\conscientia.h"
+#include "pessum_files\conscientia_files\conscientia_advanced.h"
 int main(int argc, char* argv[]) {
 	pessum::InitializePessumComponents();
 	pessum::conscientia::InitializeConscientia();

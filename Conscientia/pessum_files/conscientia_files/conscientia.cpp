@@ -5,8 +5,10 @@
 #include <Windows.h>
 #include <conio.h>
 
-#include "pessum_core.h"
-#include "logging.h"
+#include "../pessum_core.h"
+#include "../logging.h"
+#include "../lux_reader.h"
+#include "conscientia_advanced.h"
 
 namespace pessum {
 	namespace conscientia {
@@ -17,14 +19,13 @@ namespace pessum {
 		HANDLE displaybuffer1, displaybuffer2;
 		bool seconedbuffer = true;
 		_CONSOLE_SCREEN_BUFFER_INFO consoleinfo;
-		int firstpage = 0, firstlist = 0, firstitem = 0;
-		std::vector<int> loadingbars;
 	}
 }
 
 void pessum::conscientia::InitializeConscientia()
 {
-	logloc = pessum::logging::AddLogLocation("pessum_files/conscientia/");
+	logloc = pessum::logging::AddLogLocation("pessum_files/conscientia_files/conscientia/");
+	advanced::logloc = pessum::logging::AddLogLocation("pessum_files/conscientia_files/advanced");
 	displaybuffer1 = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	displaybuffer2 = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	if (SetConsoleActiveScreenBuffer(displaybuffer1) == false) {
@@ -361,13 +362,19 @@ void pessum::conscientia::Update()
 		SetConsoleActiveScreenBuffer(displaybuffer2);
 		seconedbuffer = false;
 		displaybuffer2 = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-		displaybuffer1 = displaybuffer2;
 	}
 	else if (seconedbuffer == false) {
 		SetConsoleActiveScreenBuffer(displaybuffer1);
 		seconedbuffer = true;
 		displaybuffer1 = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-		displaybuffer2 = displaybuffer1;
+	}
+	for (unsigned a = 0; a < virtualwindows.size(); a++) {
+		if (virtualwindows[a].border == true) {
+			DrawBorder(a);
+		}
+		if (virtualwindows[a].title == true) {
+			DrawTitle(a);
+		}
 	}
 }
 
@@ -390,4 +397,13 @@ void pessum::conscientia::WriteOutput(std::string text, COORD position)
 void pessum::conscientia::TerminateConscientia()
 {
 	TerminateWindowAll();
+}
+
+int pessum::conscientia::FindTextCenter(std::string text, int space)
+{
+	space = space / 2;
+	int textsize = text.size();
+	textsize = textsize / 2;
+	int textstart = space - textsize;
+	return(textstart);
 }

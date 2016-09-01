@@ -1,5 +1,5 @@
-#ifndef _PESSUM_REST_H_
-#define _PESSUM_REST_H_
+#ifndef _PESSUM_FILES_REST_H_
+#define _PESSUM_FILES_REST_H_
 #include <string>
 #include <vector>
 #include "pessum_core.h"
@@ -53,4 +53,4 @@ namespace pessum {
 		std::string GetStringVariable(std::string variablename, std::string jsonfilename);
 	}
 }
-#endif // !_PESSUM_REST_H_
+#endif // !_PESSUM_FILES_REST_H_

@@ -1,5 +1,5 @@
-#ifndef _PESSUM_LOGGING_H_
-#define _PESSUM_LOGGING_H_
+#ifndef _PESSUM_FILES_LOGGING_H_
+#define _PESSUM_FILES_LOGGING_H_
 #include <string>
 #include <fstream>
 #include <vector>
@@ -37,4 +37,4 @@ namespace pessum {
 		void TerminateLogging();
 	}
 }
-#endif // !_PESSUM_LOGGING_H_
+#endif // !_PESSUM_FILES_LOGGING_H_

@@ -63,7 +63,10 @@
     <ClCompile Include="pessum_files\pessum_core.cpp">
       <Filter>Pessum\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pessum_files\conscientia.cpp">
+    <ClCompile Include="pessum_files\conscientia_files\conscientia.cpp">
+      <Filter>Pessum\Source Files\conscientia</Filter>
+    </ClCompile>
+    <ClCompile Include="pessum_files\conscientia_files\conscientia_advanced.cpp">
       <Filter>Pessum\Source Files\conscientia</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,13 +88,19 @@
     <ClInclude Include="pessum_files\pessum_core.h">
       <Filter>Pessum\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pessum_files\conscientia.h">
+    <ClInclude Include="pessum_files\conscientia_files\conscientia.h">
+      <Filter>Pessum\Header Files\conscientia</Filter>
+    </ClInclude>
+    <ClInclude Include="pessum_files\conscientia_files\conscientia_advanced.h">
       <Filter>Pessum\Header Files\conscientia</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="pessum_files\get_page.py">
       <Filter>Pessum\Source Files\rest</Filter>
+    </None>
+    <None Include="Test.lux">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

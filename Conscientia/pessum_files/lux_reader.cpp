@@ -165,7 +165,7 @@ pessum::luxreader::Hierarchy pessum::luxreader::LoadLuxHierarchyFile(std::string
 			if (currentLevel == 0) {
 			}
 			if (currentLevel == 1) {
-				newHierarchy.mierarchypages.push_back(newPage);
+				newHierarchy.hierarchypages.push_back(newPage);
 			}
 			if (currentLevel == 2) {
 				newPage.pagelists.push_back(newList);

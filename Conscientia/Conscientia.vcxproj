@@ -113,7 +113,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="pessum_files\conscientia.cpp" />
+    <ClCompile Include="pessum_files\conscientia_files\conscientia.cpp" />
+    <ClCompile Include="pessum_files\conscientia_files\conscientia_advanced.cpp" />
     <ClCompile Include="pessum_files\logging.cpp" />
     <ClCompile Include="pessum_files\lux_reader.cpp" />
     <ClCompile Include="pessum_files\pessum_core.cpp" />
@@ -125,9 +126,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="pessum_files\get_page.py" />
+    <None Include="Test.lux" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pessum_files\conscientia.h" />
+    <ClInclude Include="pessum_files\conscientia_files\conscientia.h" />
+    <ClInclude Include="pessum_files\conscientia_files\conscientia_advanced.h" />
     <ClInclude Include="pessum_files\logging.h" />
     <ClInclude Include="pessum_files\lux_reader.h" />
     <ClInclude Include="pessum_files\pessum_core.h" />
