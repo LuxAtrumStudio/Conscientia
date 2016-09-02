@@ -15,7 +15,6 @@ namespace pessum {
 		int logloc = 0;
 		std::vector<Window> virtualwindows;
 		int boundwindow = 0;
-		int currentbuffer = 0;
 		HANDLE displaybuffer1, displaybuffer2;
 		bool seconedbuffer = true;
 		_CONSOLE_SCREEN_BUFFER_INFO consoleinfo;
