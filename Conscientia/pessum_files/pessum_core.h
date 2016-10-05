@@ -1,4 +1,4 @@
-#ifndef _PESSUM_PESSUM_CORE_H_
+#ifndef _PESSUM_FILES_PESSUM_CORE_H_
 #define _PESSUM_FILES_PESSUM_CORE_H_
 //pessum namespace is a compleate namespace for the pessum components
 namespace pessum {

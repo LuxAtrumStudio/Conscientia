@@ -94,6 +94,9 @@
     <ClInclude Include="pessum_files\conscientia_files\conscientia_advanced.h">
       <Filter>Pessum\Header Files\conscientia</Filter>
     </ClInclude>
+    <ClInclude Include="pessum_files\pessum_headers.h">
+      <Filter>Pessum\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="pessum_files\get_page.py">

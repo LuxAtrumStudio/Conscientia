@@ -178,6 +178,20 @@ pessum::luxreader::Hierarchy pessum::luxreader::LoadLuxHierarchyFile(std::string
 	return(newHierarchy);
 }
 
+std::vector<std::string> pessum::luxreader::LoadLuxListFile(std::string filedirectory)
+{
+	RawLuxCode rawcode = GetRawFileData(LUX_LIST, filedirectory);
+	std::vector<std::string> newdata;
+	if (rawcode.luxcodelines[0] == "-1") {
+		pessum::logging::LogLoc(logging::LOG_ERROR, filedirectory + " contains the incorrect file designation", logloc, "LoadLuxDataFile");
+		return(newdata);
+	}
+	for (unsigned a = 0; a < rawcode.luxcodelines.size(); a++) {
+		newdata.push_back(rawcode.luxcodelines[a]);
+	}
+	return(newdata);
+}
+
 void pessum::luxreader::SaveLuxDataFile(std::string filedirectory, DataFile ouputdata)
 {
 	RawLuxCode outputluxcode;

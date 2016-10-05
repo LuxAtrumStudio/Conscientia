@@ -1,0 +1,6 @@
+#include "pessum_core.h"
+#include "logging.h"
+#include "lux_reader.h"
+#include "rest.h"
+#include "conscientia_files\conscientia.h"
+#include "conscientia_files\conscientia_advanced.h"

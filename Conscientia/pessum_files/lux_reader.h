@@ -62,6 +62,8 @@ namespace pessum {
 		DataFile LoadLuxDataFile(std::string filedirectory);
 		//Loads the data from a lux hierarchy file, and returns in a Hierarchy struct
 		Hierarchy LoadLuxHierarchyFile(std::string filedirectory);
+		//Loads the data from a lux list file, and returns in a vector of strings
+		std::vector<std::string> LoadLuxListFile(std::string filedirectory);
 
 		//Takes a DataFile structure, and converts it to RawLuxCode, to output
 		void SaveLuxDataFile(std::string filedirectory, DataFile ouputdata);

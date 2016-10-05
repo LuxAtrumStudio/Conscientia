@@ -121,7 +121,7 @@ pessum::rest::Variable pessum::rest::InterpretVariable(std::string variablename,
 			Variable newVariable;
 			newVariable.variablename = strLineA;
 			newVariable.stringvalue = strLineB;
-			loadVal == false;
+			loadVal = false;
 			if (stringVal == false) {
 				bool doubleCheck = false;
 				for (unsigned b = 0; b < strLineB.size(); b++) {

@@ -17,8 +17,9 @@ bool pessum::logging::InitializeLogging(std::string outputfile)
 	if (logfile.is_open()) {
 		std::string outputline;
 		time_t logopentime = time(NULL);
-		outputline = "Opened log: " + outputfile + " at: " + std::to_string(logopentime);
-		Log(LOG_SUCCESS, outputline, "/Pessum/logging.cpp");
+		outputline = "Opened log: " + outputfile;
+		Log(LOG_SUCCESS, outputline, "pessum_files/logging.cpp/InitializeLogging");
+		LogTimeStamp(true);
 		return(true);
 	}
 	else {
@@ -76,11 +77,32 @@ int pessum::logging::AddLogLocation(std::string loglocationstring)
 	return loglocationindex;
 }
 
+void pessum::logging::LogTimeStamp(bool date)
+{
+	time_t currenttime;
+	time(&currenttime);
+	std::string timestring = ctime(&currenttime);
+	std::string newtime = "";
+	if (date == true) {
+		for (unsigned a = 0; a < timestring.size() - 1; a++) {
+			newtime = newtime + timestring[a];
+		}
+	}
+	else {
+		for (unsigned a = 11; a < timestring.size() - 6; a++) {
+			newtime = newtime + timestring[a];
+		}
+	}
+	Log(LOG_INFORMATION, newtime, "TimeStamp");
+
+}
+
 void pessum::logging::TerminateLogging()
 {
 	if (logfile.is_open()) {
 		time_t logclosetime = time(NULL);
-		Log(LOG_SUCCESS, "Terminated log file at: " + std::to_string(logclosetime), "/Pessum/logging.cpp");
+		Log(LOG_SUCCESS, "Terminated log file", "Pessum/logging.cpp/TerminateLogging");
+		LogTimeStamp(true);
 		logfile.close();
 	}
 	loglocationbindings.clear();
